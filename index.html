@@ -6,13 +6,17 @@
     <title>Bank Document Explainer - Crypode</title>
     <style>
         :root {
-            --gold: #D4AF37;
-            --dark: #0A0E27;
-            --darker: #050812;
-            --text: #E8E8E8;
-            --accent: #1a1f3a;
-            --success: #10B981;
-            --warning: #F59E0B;
+            --gold: #C9A84C;
+            --gold-light: #E8C97A;
+            --gold-dark: #A07830;
+            --dark: #0D0D0D;
+            --dark-2: #141414;
+            --dark-3: #1C1C1C;
+            --cream: #F5F0E8;
+            --cream-soft: #EDE8DF;
+            --paper: #F7F3EA;
+            --text-dark: #20201D;
+            --text-muted: #888880;
         }
 
         * {
@@ -22,8 +26,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
-            color: var(--text);
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
+            color: var(--cream);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             padding: 20px;
             min-height: 100vh;
@@ -65,24 +69,25 @@
 
         .lang-btn {
             padding: 8px 16px;
-            background: var(--accent);
+            background: var(--dark-3);
             border: 2px solid var(--gold);
-            color: var(--text);
-            border-radius: 6px;
+            color: var(--cream);
+            border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
+            font-size: 0.85rem;
         }
 
         .lang-btn.active {
             background: var(--gold);
-            color: var(--darker);
+            color: var(--dark);
         }
 
         .pricing-note {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(201, 168, 76, 0.1);
             border: 1px solid var(--gold);
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 15px;
             margin-bottom: 30px;
             text-align: center;
@@ -105,9 +110,9 @@
         }
 
         .card {
-            background: var(--accent);
+            background: var(--dark-3);
             border: 1px solid var(--gold);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
@@ -132,14 +137,15 @@
             font-size: 0.95em;
         }
 
+        input[type="text"],
         select,
         textarea {
             width: 100%;
             padding: 10px;
-            background: var(--darker);
+            background: var(--dark);
             border: 1px solid var(--gold);
-            color: var(--text);
-            border-radius: 6px;
+            color: var(--cream);
+            border-radius: 4px;
             font-size: 0.95em;
             font-family: inherit;
         }
@@ -151,9 +157,10 @@
         }
 
         select:focus,
+        input:focus,
         textarea:focus {
             outline: none;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
         }
 
         .section-title {
@@ -162,7 +169,7 @@
             margin-top: 18px;
             margin-bottom: 12px;
             font-size: 1.05em;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.3);
             padding-bottom: 8px;
         }
 
@@ -170,9 +177,9 @@
             width: 100%;
             padding: 12px;
             background: var(--gold);
-            color: var(--darker);
+            color: var(--dark);
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             font-weight: 700;
             cursor: pointer;
             margin-top: 10px;
@@ -182,12 +189,13 @@
         }
 
         button:hover {
-            background: #E8C547;
+            background: var(--gold-light);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 168, 76, 0.3);
         }
 
         .btn-secondary {
-            background: var(--accent);
+            background: var(--dark-3);
             color: var(--gold);
             border: 2px solid var(--gold);
             text-transform: capitalize;
@@ -195,11 +203,11 @@
 
         .btn-secondary:hover {
             background: var(--gold);
-            color: var(--darker);
+            color: var(--dark);
         }
 
         .explanation {
-            background: var(--darker);
+            background: var(--dark);
             border: 1px solid var(--gold);
             border-radius: 8px;
             padding: 20px;
@@ -216,7 +224,7 @@
 
         .explanation p {
             margin-bottom: 12px;
-            color: var(--text);
+            color: var(--cream);
         }
 
         .loading {
@@ -229,7 +237,7 @@
             display: inline-block;
             width: 30px;
             height: 30px;
-            border: 3px solid var(--accent);
+            border: 3px solid var(--dark-3);
             border-top-color: var(--gold);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -245,45 +253,34 @@
             background: rgba(239, 68, 68, 0.1);
             border-left: 4px solid #EF4444;
             padding: 15px;
-            border-radius: 6px;
+            border-radius: 4px;
             color: #FECACA;
             margin: 15px 0;
-        }
-
-        .document-types {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .doc-type-btn {
-            padding: 8px;
-            background: var(--darker);
-            border: 1px solid var(--gold);
-            color: var(--text);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85em;
-            transition: all 0.3s;
-        }
-
-        .doc-type-btn:hover {
-            background: var(--gold);
-            color: var(--darker);
         }
 
         footer {
             text-align: center;
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid var(--accent);
-            color: var(--text);
+            border-top: 1px solid var(--dark-3);
+            color: var(--cream);
             opacity: 0.7;
             font-size: 0.9em;
         }
+
+        @media (max-width: 768px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .language-toggle {
+                position: static;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="language-toggle">
         <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
@@ -298,7 +295,7 @@
         </header>
 
         <div class="pricing-note">
-            <strong id="pricingLabel">💼 Paid Tool</strong> | <span id="pricingDesc">Expert AI explanations for bank statements, contracts, and financial documents</span>
+            <strong id="pricingLabel">💼 Paid Tool</strong> | <span id="pricingDesc">Expert AI explanations for bank statements and financial documents</span>
         </div>
 
         <div class="layout">
@@ -309,21 +306,13 @@
                 <div class="form-group">
                     <label id="docTypeLabel">Document Type</label>
                     <select id="documentType">
-                        <option value="bank-statement" id="opt-bank">Bank Statement</option>
-                        <option value="credit-card" id="opt-credit">Credit Card Statement</option>
-                        <option value="loan-agreement" id="opt-loan">Loan Agreement</option>
-                        <option value="investment" id="opt-invest">Investment Document</option>
-                        <option value="insurance" id="opt-insurance">Insurance Policy</option>
-                        <option value="other" id="opt-other">Other Financial Document</option>
+                        <option value="bank-statement">Bank Statement</option>
+                        <option value="credit-card">Credit Card Statement</option>
+                        <option value="loan-agreement">Loan Agreement</option>
+                        <option value="investment">Investment Document</option>
+                        <option value="insurance">Insurance Policy</option>
+                        <option value="other">Other Financial Document</option>
                     </select>
-                </div>
-
-                <div class="section-title" id="quickSelectTitle">Quick templates:</div>
-                <div class="document-types">
-                    <button type="button" class="doc-type-btn" onclick="setDocType('bank-statement')" id="btn-bank">📊 Bank Statement</button>
-                    <button type="button" class="doc-type-btn" onclick="setDocType('credit-card')" id="btn-credit">💳 Credit Card</button>
-                    <button type="button" class="doc-type-btn" onclick="setDocType('loan-agreement')" id="btn-loan">📋 Loan Agreement</button>
-                    <button type="button" class="doc-type-btn" onclick="setDocType('investment')" id="btn-invest">📈 Investment</button>
                 </div>
 
                 <div class="section-title" id="pasteLabel">Paste Document Text</div>
@@ -333,7 +322,7 @@
 
                 <div class="form-group">
                     <label id="focusLabel">What would you like explained?</label>
-                    <textarea id="focusArea" placeholder="E.g., What is this fee? What do these terms mean? Explain the charges in detail..." style="min-height: 80px;"></textarea>
+                    <textarea id="focusArea" placeholder="E.g., What is this fee? Explain the charges. What do these terms mean?" style="min-height: 80px;"></textarea>
                 </div>
 
                 <button onclick="explainDocument()">🔍 Explain Document</button>
@@ -344,7 +333,7 @@
             <div class="card">
                 <h2 id="outputTitle">Explanation</h2>
                 <div id="explanationContainer">
-                    <p style="color: var(--text); opacity: 0.7; text-align: center; padding: 40px 0;" id="placeholderText">
+                    <p style="color: var(--cream); opacity: 0.7; text-align: center; padding: 40px 0;" id="placeholderText">
                         Paste a document and click "Explain Document"
                     </p>
                 </div>
@@ -361,20 +350,9 @@
             subtitle: 'Understand complex banking documents in simple terms',
             credit: 'Part of <a href="https://crypode.com" target="_blank" style="color: var(--gold); text-decoration: none;">Crypode</a>',
             pricingLabel: '💼 Paid Tool',
-            pricingDesc: 'Expert AI explanations for bank statements, contracts, and financial documents',
+            pricingDesc: 'Expert AI explanations for bank statements and financial documents',
             inputTitle: 'Your Document',
             docTypeLabel: 'Document Type',
-            'opt-bank': 'Bank Statement',
-            'opt-credit': 'Credit Card Statement',
-            'opt-loan': 'Loan Agreement',
-            'opt-invest': 'Investment Document',
-            'opt-insurance': 'Insurance Policy',
-            'opt-other': 'Other Financial Document',
-            quickSelectTitle: 'Quick templates:',
-            'btn-bank': '📊 Bank Statement',
-            'btn-credit': '💳 Credit Card',
-            'btn-loan': '📋 Loan Agreement',
-            'btn-invest': '📈 Investment',
             pasteLabel: 'Paste Document Text',
             focusLabel: 'What would you like explained?',
             outputTitle: 'Explanation',
@@ -386,25 +364,14 @@
             subtitle: 'افهم المستندات المالية المعقدة بطريقة بسيطة',
             credit: 'جزء من <a href="https://crypode.com" target="_blank" style="color: var(--gold); text-decoration: none;">Crypode</a>',
             pricingLabel: '💼 أداة مدفوعة',
-            pricingDesc: 'شرح ذكي للبيانات المصرفية والعقود والمستندات المالية',
+            pricingDesc: 'شرح ذكي للبيانات المصرفية والمستندات المالية',
             inputTitle: 'المستند الخاص بك',
             docTypeLabel: 'نوع المستند',
-            'opt-bank': 'كشف الحساب البنكي',
-            'opt-credit': 'كشف بطاقة الائتمان',
-            'opt-loan': 'اتفاقية القرض',
-            'opt-invest': 'وثيقة استثمار',
-            'opt-insurance': 'بوليصة التأمين',
-            'opt-other': 'مستند مالي آخر',
-            quickSelectTitle: 'قوالب سريعة:',
-            'btn-bank': '📊 كشف حساب',
-            'btn-credit': '💳 بطاقة ائتمان',
-            'btn-loan': '📋 قرض',
-            'btn-invest': '📈 استثمار',
             pasteLabel: 'الصق نص المستند',
             focusLabel: 'ما الذي تريد شرحه؟',
             outputTitle: 'الشرح',
             placeholderText: 'الصق مستندًا وانقر على "شرح المستند"',
-            disclaimer: '🏦 <strong>إخلاء المسؤولية:</strong> الشروحات التي تم إنشاؤها بواسطة الذكاء الاصطناعي لأغراض إعلامية فقط. للمسائل القانونية أو المالية، استشر المحترفين المؤهلين.',
+            disclaimer: '🏦 <strong>إخلاء المسؤولية:</strong> الشروحات التي تم إنشاؤها بواسطة الذكاء الاصطناعي لأغراض إعلامية فقط.',
         };
 
         let currentLang = 'en';
@@ -413,14 +380,8 @@
             const texts = currentLang === 'en' ? en : ar;
             document.documentElement.lang = currentLang;
             Object.keys(texts).forEach(key => {
-                const el = document.getElementById(key) || document.getElementById(key);
-                if (el) {
-                    if (key.startsWith('opt-') || key.startsWith('btn-')) {
-                        el.textContent = texts[key];
-                    } else {
-                        el.innerHTML = texts[key];
-                    }
-                }
+                const el = document.getElementById(key);
+                if (el) el.innerHTML = texts[key];
             });
         }
 
@@ -429,10 +390,6 @@
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             updateLanguage();
-        }
-
-        function setDocType(type) {
-            document.getElementById('documentType').value = type;
         }
 
         function resetForm() {
@@ -447,7 +404,7 @@
             const focusArea = document.getElementById('focusArea').value;
 
             if (!docText.trim()) {
-                showError('Please paste the document text');
+                showError(currentLang === 'en' ? 'Please paste the document text' : 'يرجى لصق نص المستند');
                 return;
             }
 
@@ -455,8 +412,8 @@
 
             try {
                 const prompt = currentLang === 'en' 
-                    ? `Explain this ${docType} in simple, easy-to-understand terms for a Gulf professional. Focus on key points, fees, terms, and what matters most. ${focusArea ? 'Specifically explain: ' + focusArea : ''}\n\nDocument:\n${docText}\n\nProvide clear explanations without technical jargon. Use simple language suitable for someone not trained in banking.`
-                    : `اشرح هذا ${docType} بطريقة بسيطة وسهلة الفهم للمتخصصين الخليجيين. ركز على النقاط الرئيسية والرسوم والشروط وما هو مهم. ${focusArea ? 'اشرح بشكل خاص: ' + focusArea : ''}\n\nالمستند:\n${docText}\n\nقدم شروحات واضحة دون مصطلحات تقنية معقدة. استخدم لغة بسيطة مناسبة.`;
+                    ? `Explain this ${docType} in simple, easy-to-understand terms for a Gulf professional. Focus on key points, fees, terms, and what matters most. ${focusArea ? 'Specifically explain: ' + focusArea : ''}\n\nDocument:\n${docText}\n\nProvide clear explanations without technical jargon.`
+                    : `اشرح هذا ${docType} بطريقة بسيطة وسهلة الفهم للمتخصصين الخليجيين. ركز على النقاط الرئيسية والرسوم والشروط. ${focusArea ? 'اشرح بشكل خاص: ' + focusArea : ''}\n\nالمستند:\n${docText}\n\nقدم شروحات واضحة دون مصطلحات معقدة.`;
 
                 const response = await fetch('/api/generate', {
                     method: 'POST',
@@ -471,8 +428,7 @@
                 const explanation = textContent.text.trim();
                 displayExplanation(explanation);
             } catch (e) {
-                console.error('Error:', e);
-                showError('Failed to explain document. Please try again.');
+                showError(currentLang === 'en' ? 'Failed to explain document' : 'فشل في شرح المستند');
             }
         }
 
