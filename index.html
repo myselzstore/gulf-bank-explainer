@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Document Explainer - Crypode</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #0A0E27;
+            --darker: #050812;
+            --text: #E8E8E8;
+            --accent: #1a1f3a;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        html[lang="ar"] {
+            direction: rtl;
+            text-align: right;
+        }
+
+        html[lang="ar"] .ltr-text {
+            direction: ltr;
+            text-align: left;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--gold);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            background: var(--accent);
+            border: 2px solid var(--gold);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            color: var(--darker);
+        }
+
+        .pricing-note {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .pricing-note strong {
+            color: var(--gold);
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--accent);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            background: var(--darker);
+            border: 1px solid var(--gold);
+            color: var(--text);
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+            line-height: 1.5;
+        }
+
+        select:focus,
+        textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .section-title {
+            color: var(--gold);
+            font-weight: 700;
+            margin-top: 18px;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--gold);
+            color: var(--darker);
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: #E8C547;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--accent);
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            text-transform: capitalize;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--darker);
+        }
+
+        .explanation {
+            background: var(--darker);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            line-height: 1.7;
+        }
+
+        .explanation h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .explanation p {
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--gold);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--accent);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #EF4444;
+            padding: 15px;
+            border-radius: 6px;
+            color: #FECACA;
+            margin: 15px 0;
+        }
+
+        .document-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .doc-type-btn {
+            padding: 8px;
+            background: var(--darker);
+            border: 1px solid var(--gold);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.3s;
+        }
+
+        .doc-type-btn:hover {
+            background: var(--gold);
+            color: var(--darker);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--accent);
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-toggle">
+        <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+        <button class="lang-btn" onclick="switchLanguage('ar')">العربية</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🏦 Bank Document Explainer</h1>
+            <p id="subtitle">Understand complex banking documents in simple terms</p>
+            <p style="margin-top: 10px; font-size: 0.9em; color: var(--gold);" id="credit">Part of <a href="https://crypode.com" target="_blank" style="color: var(--gold); text-decoration: none;">Crypode</a></p>
+        </header>
+
+        <div class="pricing-note">
+            <strong id="pricingLabel">💼 Paid Tool</strong> | <span id="pricingDesc">Expert AI explanations for bank statements, contracts, and financial documents</span>
+        </div>
+
+        <div class="layout">
+            <!-- Input Card -->
+            <div class="card">
+                <h2 id="inputTitle">Your Document</h2>
+
+                <div class="form-group">
+                    <label id="docTypeLabel">Document Type</label>
+                    <select id="documentType">
+                        <option value="bank-statement" id="opt-bank">Bank Statement</option>
+                        <option value="credit-card" id="opt-credit">Credit Card Statement</option>
+                        <option value="loan-agreement" id="opt-loan">Loan Agreement</option>
+                        <option value="investment" id="opt-invest">Investment Document</option>
+                        <option value="insurance" id="opt-insurance">Insurance Policy</option>
+                        <option value="other" id="opt-other">Other Financial Document</option>
+                    </select>
+                </div>
+
+                <div class="section-title" id="quickSelectTitle">Quick templates:</div>
+                <div class="document-types">
+                    <button type="button" class="doc-type-btn" onclick="setDocType('bank-statement')" id="btn-bank">📊 Bank Statement</button>
+                    <button type="button" class="doc-type-btn" onclick="setDocType('credit-card')" id="btn-credit">💳 Credit Card</button>
+                    <button type="button" class="doc-type-btn" onclick="setDocType('loan-agreement')" id="btn-loan">📋 Loan Agreement</button>
+                    <button type="button" class="doc-type-btn" onclick="setDocType('investment')" id="btn-invest">📈 Investment</button>
+                </div>
+
+                <div class="section-title" id="pasteLabel">Paste Document Text</div>
+                <div class="form-group">
+                    <textarea id="documentText" placeholder="Paste the bank statement, contract, or financial document here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label id="focusLabel">What would you like explained?</label>
+                    <textarea id="focusArea" placeholder="E.g., What is this fee? What do these terms mean? Explain the charges in detail..." style="min-height: 80px;"></textarea>
+                </div>
+
+                <button onclick="explainDocument()">🔍 Explain Document</button>
+                <button class="btn-secondary" onclick="resetForm()">Reset</button>
+            </div>
+
+            <!-- Output Card -->
+            <div class="card">
+                <h2 id="outputTitle">Explanation</h2>
+                <div id="explanationContainer">
+                    <p style="color: var(--text); opacity: 0.7; text-align: center; padding: 40px 0;" id="placeholderText">
+                        Paste a document and click "Explain Document"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p id="disclaimer">🏦 <strong>Disclaimer:</strong> AI-generated explanations are for informational purposes. For legal or financial matters, consult qualified professionals.</p>
+        </footer>
+    </div>
+
+    <script>
+        const en = {
+            subtitle: 'Understand complex banking documents in simple terms',
+            credit: 'Part of <a href="https://crypode.com" target="_blank" style="color: var(--gold); text-decoration: none;">Crypode</a>',
+            pricingLabel: '💼 Paid Tool',
+            pricingDesc: 'Expert AI explanations for bank statements, contracts, and financial documents',
+            inputTitle: 'Your Document',
+            docTypeLabel: 'Document Type',
+            'opt-bank': 'Bank Statement',
+            'opt-credit': 'Credit Card Statement',
+            'opt-loan': 'Loan Agreement',
+            'opt-invest': 'Investment Document',
+            'opt-insurance': 'Insurance Policy',
+            'opt-other': 'Other Financial Document',
+            quickSelectTitle: 'Quick templates:',
+            'btn-bank': '📊 Bank Statement',
+            'btn-credit': '💳 Credit Card',
+            'btn-loan': '📋 Loan Agreement',
+            'btn-invest': '📈 Investment',
+            pasteLabel: 'Paste Document Text',
+            focusLabel: 'What would you like explained?',
+            outputTitle: 'Explanation',
+            placeholderText: 'Paste a document and click "Explain Document"',
+            disclaimer: '🏦 <strong>Disclaimer:</strong> AI-generated explanations are for informational purposes. For legal or financial matters, consult qualified professionals.',
+        };
+
+        const ar = {
+            subtitle: 'افهم المستندات المالية المعقدة بطريقة بسيطة',
+            credit: 'جزء من <a href="https://crypode.com" target="_blank" style="color: var(--gold); text-decoration: none;">Crypode</a>',
+            pricingLabel: '💼 أداة مدفوعة',
+            pricingDesc: 'شرح ذكي للبيانات المصرفية والعقود والمستندات المالية',
+            inputTitle: 'المستند الخاص بك',
+            docTypeLabel: 'نوع المستند',
+            'opt-bank': 'كشف الحساب البنكي',
+            'opt-credit': 'كشف بطاقة الائتمان',
+            'opt-loan': 'اتفاقية القرض',
+            'opt-invest': 'وثيقة استثمار',
+            'opt-insurance': 'بوليصة التأمين',
+            'opt-other': 'مستند مالي آخر',
+            quickSelectTitle: 'قوالب سريعة:',
+            'btn-bank': '📊 كشف حساب',
+            'btn-credit': '💳 بطاقة ائتمان',
+            'btn-loan': '📋 قرض',
+            'btn-invest': '📈 استثمار',
+            pasteLabel: 'الصق نص المستند',
+            focusLabel: 'ما الذي تريد شرحه؟',
+            outputTitle: 'الشرح',
+            placeholderText: 'الصق مستندًا وانقر على "شرح المستند"',
+            disclaimer: '🏦 <strong>إخلاء المسؤولية:</strong> الشروحات التي تم إنشاؤها بواسطة الذكاء الاصطناعي لأغراض إعلامية فقط. للمسائل القانونية أو المالية، استشر المحترفين المؤهلين.',
+        };
+
+        let currentLang = 'en';
+
+        function updateLanguage() {
+            const texts = currentLang === 'en' ? en : ar;
+            document.documentElement.lang = currentLang;
+            Object.keys(texts).forEach(key => {
+                const el = document.getElementById(key) || document.getElementById(key);
+                if (el) {
+                    if (key.startsWith('opt-') || key.startsWith('btn-')) {
+                        el.textContent = texts[key];
+                    } else {
+                        el.innerHTML = texts[key];
+                    }
+                }
+            });
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateLanguage();
+        }
+
+        function setDocType(type) {
+            document.getElementById('documentType').value = type;
+        }
+
+        function resetForm() {
+            document.getElementById('documentType').value = 'bank-statement';
+            document.getElementById('documentText').value = '';
+            document.getElementById('focusArea').value = '';
+        }
+
+        async function explainDocument() {
+            const docType = document.getElementById('documentType').value;
+            const docText = document.getElementById('documentText').value;
+            const focusArea = document.getElementById('focusArea').value;
+
+            if (!docText.trim()) {
+                showError('Please paste the document text');
+                return;
+            }
+
+            document.getElementById('explanationContainer').innerHTML = '<div class="loading"><span class="spinner"></span>' + (currentLang === 'en' ? 'Analyzing document...' : 'جاري تحليل المستند...') + '</div>';
+
+            try {
+                const prompt = currentLang === 'en' 
+                    ? `Explain this ${docType} in simple, easy-to-understand terms for a Gulf professional. Focus on key points, fees, terms, and what matters most. ${focusArea ? 'Specifically explain: ' + focusArea : ''}\n\nDocument:\n${docText}\n\nProvide clear explanations without technical jargon. Use simple language suitable for someone not trained in banking.`
+                    : `اشرح هذا ${docType} بطريقة بسيطة وسهلة الفهم للمتخصصين الخليجيين. ركز على النقاط الرئيسية والرسوم والشروط وما هو مهم. ${focusArea ? 'اشرح بشكل خاص: ' + focusArea : ''}\n\nالمستند:\n${docText}\n\nقدم شروحات واضحة دون مصطلحات تقنية معقدة. استخدم لغة بسيطة مناسبة.`;
+
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+
+                const result = await response.json();
+                const textContent = result.content.find(block => block.type === 'text');
+                if (!textContent) throw new Error('No response');
+
+                const explanation = textContent.text.trim();
+                displayExplanation(explanation);
+            } catch (e) {
+                console.error('Error:', e);
+                showError('Failed to explain document. Please try again.');
+            }
+        }
+
+        function displayExplanation(text) {
+            const container = document.getElementById('explanationContainer');
+            container.innerHTML = `<div class="explanation"><p style="white-space: pre-wrap;">${text}</p></div>`;
+        }
+
+        function showError(message) {
+            document.getElementById('explanationContainer').innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        updateLanguage();
+    </script>
+</body>
+</html>

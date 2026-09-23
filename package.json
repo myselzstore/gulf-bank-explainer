@@ -1,0 +1,8 @@
+{
+  "name": "gulf-bank-explainer",
+  "version": "1.0.0",
+  "description": "AI Bank Document Explainer for Gulf Professionals",
+  "engines": {
+    "node": "24.x"
+  }
+}
